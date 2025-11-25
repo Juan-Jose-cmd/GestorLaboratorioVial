@@ -1,0 +1,99 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0A192F;
+    color: #D9E2EC;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.login-card {
+    background: #172A45;
+    padding: 3rem 2.5rem;
+    width: 90%;
+    max-width: 420px;
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+    border: 1px solid #64FFDA44;
+}
+
+.login-card h1 {
+    text-align: center;
+    margin-bottom: .5rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #64FFDA;
+}
+
+.login-card h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #8892B0;
+    font-size: .9rem;
+    font-weight: 400;
+}
+
+/* FORMULARIO */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.login-form label {
+    font-size: .9rem;
+    font-weight: 600;
+    color: #D9E2EC;
+}
+
+.login-form input {
+    height: 40px;
+    border-radius: 6px;
+    background: #0A192F;
+    border: 1px solid #233554;
+    padding-left: 12px;
+    color: #D9E2EC;
+    transition: all .3s ease;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #64FFDA;
+    box-shadow: 0 0 5px #64FFDA;
+}
+
+.login-btn {
+    margin-top: 1rem;
+    padding: 12px;
+    background: #64FFDA;
+    color: #0A192F;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.login-btn:hover {
+    background: #4bd7b6;
+    transform: scale(1.03);
+}
+
+.secondary-btn {
+    margin-top: .8rem;
+    border: 1px solid #64FFDA;
+    background: transparent;
+    color: #64FFDA;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s ease;
+    font-weight: 600;
+}
+
+.secondary-btn:hover {
+    background: #64FFDA22;
+    transform: scale(1.02);
+}

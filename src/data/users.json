@@ -1,0 +1,4 @@
+[
+    { "email": "lab@laboratorio.com", "password": "1234", "rol": "laboratorista" },
+    { "email": "director@obra.com", "password": "abcd", "rol": "director" }
+]
