@@ -1,0 +1,105 @@
+
+.proctor-container {
+    min-height: 100vh;
+    width: 100%;
+    background: #0A192F;  
+    color: #D9E2EC;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    padding: 2.5rem 2rem;
+}
+
+.proctor-container h2 {
+    font-size: 1.8rem;
+    color: #64FFDA;
+    margin-bottom: 1.5rem;
+}
+
+.proctor-section {
+    background: #172A45;
+    border-radius: 12px;
+    border: 1px solid #233554;
+    padding: 1.5rem 1.5rem 1.8rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+}
+
+.proctor-section h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #E6F1FF;
+    border-bottom: 1px solid #233554;
+    padding-bottom: .5rem;
+}
+
+.proctor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem 1.2rem;
+}
+
+@media (max-width: 900px) {
+    .proctor-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .proctor-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.field label {
+    font-size: .85rem;
+    font-weight: 600;
+    color: #E6F1FF;
+}
+
+.field input,
+.field select,
+.field textarea {
+    background: #0A192F;
+    border: 1px solid #233554;
+    border-radius: 6px;
+    padding: .5rem .6rem;
+    color: #D9E2EC;
+    font-size: .9rem;
+    transition: .2s ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: #8892B0;
+    font-size: .85rem;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #64FFDA;
+    box-shadow: 0 0 0 1px #64FFDA55;
+}
+
+.proctor-section textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+.field input[readonly] {
+    background: #0b1220;
+    border-style: dashed;
+    color: #9FB3C8;
+}
+
+.proctor-section small {
+    font-size: .8rem;
+    color: #9FB3C8;
+}
