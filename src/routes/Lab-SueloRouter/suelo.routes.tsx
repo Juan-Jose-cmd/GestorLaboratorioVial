@@ -1,9 +1,9 @@
-import EnsayosSuelo from "../../pages/Laboratorista/TiposDeEnsayos/Suelo/EnsayosSuelo";
-import Clasificacion from "../../pages/Laboratorista/TiposDeEnsayos/Suelo/Clasificacion/Clasificacion";
-import Densidad from "../../pages/Laboratorista/TiposDeEnsayos/Suelo/Desidad/Densidad";
-import Humedad from "../../pages/Laboratorista/TiposDeEnsayos/Suelo/Humedad/Humedad";
-import Proctor from "../../pages/Laboratorista/TiposDeEnsayos/Suelo/Proctor/Proctor";
-import Vsr from "../../pages/Laboratorista/TiposDeEnsayos/Suelo/Vsr/Vsr";
+import EnsayosSuelo from "../../views/pages/Laboratorista/TiposDeEnsayos/Suelo/EnsayosSuelo";
+import Clasificacion from "../../views/pages/Laboratorista/TiposDeEnsayos/Suelo/Clasificacion/Clasificacion";
+import Densidad from "../../views/pages/Laboratorista/TiposDeEnsayos/Suelo/Desidad/Densidad";
+import Humedad from "../../views/pages/Laboratorista/TiposDeEnsayos/Suelo/Humedad/Humedad";
+import Proctor from "../../views/pages/Laboratorista/TiposDeEnsayos/Suelo/Proctor/Proctor";
+import Vsr from "../../views/pages/Laboratorista/TiposDeEnsayos/Suelo/Vsr/Vsr";
 
 export const SueloRoutes = [
     { path: "/laboratorista/suelo", element: <EnsayosSuelo /> },

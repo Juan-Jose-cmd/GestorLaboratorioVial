@@ -1,0 +1,16 @@
+.form select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #CBD5E1;
+    background: #F8FAFC;
+    font-size: 1rem;
+    color: #1E2937;
+    outline: none;
+    transition: border .25s ease, box-shadow .25s ease;
+}
+
+.form select:focus {
+    border-color: #3B82F6;
+    box-shadow: 0 0 8px rgba(59,130,246,0.4);
+}

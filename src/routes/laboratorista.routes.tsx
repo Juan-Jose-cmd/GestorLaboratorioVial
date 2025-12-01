@@ -1,4 +1,4 @@
-import LabHome from "../pages/Laboratorista/LabHome";
+import LabHome from "../views/pages/Laboratorista/LabHome";
 
 import { SueloRoutes } from "./Lab-SueloRouter/suelo.routes";
 import { AsfaltoRoutes } from "./Lab-AsfaltoRouter/asfalto.routes";
