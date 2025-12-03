@@ -189,3 +189,107 @@ El backend se organiza por módulos de dominio, respetando una separación de ca
 
 La idea es mantener los endpoints **predecibles y consistentes**.
 
+## Arquitectura del frontend
+
+**Stack:**
+
+- React
+- Vite
+- TypeScript
+
+- `src/
+  - app/
+    - router.tsx
+    - providers.tsx
+  - features/
+    - auth/
+      - pages/
+      - components/
+      - hooks/
+      - api.ts
+    - ensayos/
+    - solicitudes/
+    - equipos/
+    - inventario/
+    - usuarios/
+  - shared/
+    - components/
+    - hooks/
+    - layouts/
+    - utils/
+    - types/
+`
+
+
+### Principios
+
+- **Feature-based**: agrupar por funcionadlidad no solo portipo de archivo.
+- **Mobile first**: diseño pensado para usarse en celular y luego adaptado a escritorio.
+- **Estados claros**: loaders, empty states, mensajes de error y de exito visibles.
+
+
+### Pantallas principales
+
+- Login
+- Dashboard (según rol)
+- Listado de solicitudes
+- Carga/edición de ensayos
+- Detalle de ensayo + botón para PDF
+- Gestión de equipos
+- Gestión de inventario
+- Administración de usuarios (sólo jerárquico)
+
+
+## Infraestructura y despliegue
+
+La idea es mantener una infraestructura simple pero lista para producción:
+
+- **Backend**
+    - Deploy en un servicio como VPS.
+    - Variables de entorno para credenciales, JWT secret, conexión a DB, SMTP, etc.
+
+- **Base de datos**
+    - PostgreSQL administrado (Neon, Supabase o similar).
+
+- **Frontend**
+    - Build estático (Vite) desplegado en servicios como Netlify / Vercel / S3 + CloudFront.
+
+- **Almacenamiento de PDFs**
+    - Servicio tipo S3 (S3, R2, etc.), guardando sólo la ruta en la base de datos.
+
+- **Logs y monitoreo**
+    - Logs estructurados en el backend.
+    - Manejo centralizado de errores.
+
+
+## Seguridad y permisos
+
+- **Autenticación**
+  - JWT con refresh tokens.
+  - Almacenar sólo el access token en el frontend (por ejemplo en memory + HTTP-only cookie, según enfoque).
+
+- **Autorización (Roles)**
+  - Middleware/guards según rol:
+    - Rutas exclusivas para laboratoristas.
+    - Rutas exclusivas para directores.
+    - Rutas exclusivas para jerárquicos.
+
+- **Validación**
+  - Validación de entrada en backend (DTOs / schemas).
+  - Validaciones básicas en frontend para mejor UX.
+
+
+## Roadmap técnico
+
+1. Definir modelos de base de datos (TypeORM + PostgreSQL).
+2. Implementar módulos base del backend:
+    - Auth + usuarios
+    - Obras
+    - Solicitudes
+    - Ensayos
+3. Agregar generación de PDFs de ensayos.
+4. Implementar gestión de equipos e inventario.
+5. Crear frontend con flujos básicos por rol.
+6. Añadir notificaciones vía email.
+7. Pulir UI/UX, estados de carga y manejo de errores.
+8. Preparar demo, documentación y versión deployada.
