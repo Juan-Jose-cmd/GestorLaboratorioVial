@@ -149,7 +149,7 @@ El backend se organiza por módulos de dominio, respetando una separación de ca
     - config/
     - mail/
     - pdf/
-  - infra/
+  - config/
     - db/
     - logger/
 `
