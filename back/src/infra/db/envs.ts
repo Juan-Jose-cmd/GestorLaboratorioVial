@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-export const PORT:number = Number(process.env.PORT) || 3000;
+export const PORT:number = Number(process.env.PORT) || 8080;
 
 export const DB_HOST = process.env.DB_HOST || "localhost";
 export const DB_PORT = Number(process.env.DB_PORT) || 5432;
