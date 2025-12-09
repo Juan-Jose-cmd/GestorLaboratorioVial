@@ -1,4 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { Obra } from "../obras/obra.entity";
+import { SolicitudEnsayo } from "../solicitudes/solicitud.entity";
+import { Ensayo } from "../ensayos/ensayo.entity";
+import { HistorialEquipo } from '../equipos/historialEquipo.entity';
 
 export type RolUsuario = 'laboratorista' | 'director' | 'jerarquico';
 
@@ -35,6 +39,18 @@ export class User {
         enum: ['laboratorista', 'director', 'jerarquico'],
     })
     rol: RolUsuario;
+
+    @OneToMany(() => Obra, obra => obra.director)
+    obrasDirigidas: Obra[];
+    
+    @OneToMany(() => SolicitudEnsayo, solicitud => solicitud.creadoPor)
+    solicitudesCreadas: SolicitudEnsayo[];
+    
+    @OneToMany(() => Ensayo, ensayo => ensayo.laboratorista)
+    ensayosAsignados: Ensayo[];
+    
+    @OneToMany(() => HistorialEquipo, historial => historial.realizadoPor)
+    movimientosEquipos: HistorialEquipo[];
 
     @CreateDateColumn()
     creadoEn: Date;

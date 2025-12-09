@@ -1,6 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { User } from "../users/user.entity";
-import { UUID } from "typeorm/driver/mongodb/bson.typings";
+import { SolicitudEnsayo } from "../solicitudes/solicitud.entity";
+import { Ensayo } from "../ensayos/ensayo.entity";
+import { Equipo } from "../equipos/equipo.entity";
 
 export type EstadoObra = "activa" | "pausada" | "finalizada";
 
@@ -31,6 +33,15 @@ export class Obra {
         default: 'activa'
     })
     estado: EstadoObra;
+
+    @OneToMany(() => SolicitudEnsayo, solicitud => solicitud.obra)
+    solicitudes: SolicitudEnsayo[];
+    
+    @OneToMany(() => Ensayo, ensayo => ensayo.obra)
+    ensayos: Ensayo[];
+    
+    @OneToMany(() => Equipo, equipo => equipo.obraActual)
+    equiposAsignados: Equipo[];
 
     @CreateDateColumn()
     creadoEn: Date;

@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToOne } from "typeorm";
 import { Obra } from "../obras/obra.entity";
 import { User } from "../users/user.entity";
+import { Ensayo } from "../ensayos/ensayo.entity";
 
 export type TipoEnsayo = "suelo" | "hormigon" | "asfalto";
 
@@ -47,6 +48,9 @@ export class SolicitudEnsayo {
 
     @Column({ nullable: true })
     descripcion?: string;
+
+    @OneToOne(() => Ensayo, ensayo => ensayo.solicitud)
+    ensayo: Ensayo;
 
     @CreateDateColumn()
     creadoEn: Date;

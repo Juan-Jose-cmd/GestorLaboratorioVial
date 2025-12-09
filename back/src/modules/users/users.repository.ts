@@ -1,39 +1,61 @@
 import { AppDataSource } from "../../infra/db/data-source";
 import { RolUsuario, User } from "./user.entity";
-
-const repository = AppDataSource.getRepository(User);
+import { Repository } from "typeorm";
 
 export class UserRepository {
+    private repository: Repository<User>;
 
-    static async create(data: { name: string; email: string; password: string; rol: RolUsuario }) {
-        const user = repository.create(data);
+    constructor() {
+        this.repository = AppDataSource.getRepository(User);
+    }
 
-        return await repository.save(user);
-    };
+    async create(data: { 
+        name: string; 
+        email: string; 
+        password: string; 
+        rol: RolUsuario 
+    }): Promise<User> {
+        const user = this.repository.create(data);
+        return await this.repository.save(user);
+    }
 
-    static findAll() {
-        return repository.find();
-    };
-
-    static findByEmail(email: string) {
-        return repository.findOne({
-            where: {
-                email,
-            }
+    async findAll(): Promise<User[]> {
+        return await this.repository.find({
+            where: { activo: true },
+            order: { name: 'ASC' }
         });
-    };
+    }
 
-    static findById(id: string) {
-        return repository.findOne({
-            where: {
-                id,
-            }
-            });
-    };
+    async findById(id: string): Promise<User | null> {
+        return await this.repository.findOne({
+            where: { id }
+        });
+    }
 
-    static async update(id: string, data: { name: string; email: string; password: string; rol: RolUsuario }) {
-        await repository.update({ id }, data);
-        return this.findById(id);
-    };
-};
+    async findByEmail(email: string): Promise<User | null> {
+        return await this.repository.findOne({
+            where: { email }
+        });
+    }
 
+    async findByRol(rol: RolUsuario): Promise<User[]> {
+        return await this.repository.find({
+            where: { rol, activo: true }
+        });
+    }
+
+    async update(id: string, data: Partial<User>): Promise<User | null> {
+        await this.repository.update(id, data);
+        return await this.findById(id);
+    }
+
+    async softDelete(id: string): Promise<void> {
+        await this.repository.update(id, { activo: false });
+    }
+
+    async countByRol(rol: RolUsuario): Promise<number> {
+        return await this.repository.count({
+            where: { rol, activo: true }
+        });
+    }
+}
