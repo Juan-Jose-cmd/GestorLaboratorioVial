@@ -35,6 +35,9 @@ export class Ensayo {
     })
     estado: EstadoEnsayo;
 
+    @Column("text", { array: true, nullable: true })
+    imagenesGraficos: string[];
+
     @CreateDateColumn()
     creadoEn: Date;
 
