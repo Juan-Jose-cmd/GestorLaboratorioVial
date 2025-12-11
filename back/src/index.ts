@@ -1,7 +1,9 @@
 import { server } from "./server";
-import { AppDataSource } from "./infra/db/data-source";
 import { PORT } from "./infra/db/envs";
 import 'reflect-metadata';
+import dotenv from 'dotenv';
+dotenv.config();
+import { AppDataSource } from './infra/db/data-source'; 
 
 const start = async () => {
     try{
