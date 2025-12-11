@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, DeleteDateColumn } from "typeorm";
 import { Obra } from "../obras/obra.entity";
 import { SolicitudEnsayo } from "../solicitudes/solicitud.entity";
 import { Ensayo } from "../ensayos/ensayo.entity";
@@ -6,15 +6,16 @@ import { HistorialEquipo } from '../equipos/historialEquipo.entity';
 
 export type RolUsuario = 'laboratorista' | 'director' | 'jerarquico';
 
-@Entity({ name: 'users' })
-export class User {
+@Entity({ name: 'usuario' })
+export class Usuario {
 
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column({ 
-        name: 'name',
+        name: 'nombre_completo',
         nullable: false,
+        length: 100
     })
     name: string;
 
@@ -26,19 +27,31 @@ export class User {
     email: string;
 
     @Column({ 
-        name: 'password',
-        nullable: false 
+        name: 'password_hash',
+        nullable: false,
+        select: false 
     })
     password: string;
 
-    @Column({ default: true })
-    activo: boolean;
+    @Column({ 
+        name: 'es_activo',
+        default: true 
+    })
+    esActivo: boolean;
 
     @Column({
         type: 'enum',
         enum: ['laboratorista', 'director', 'jerarquico'],
+        default: 'laboratorista'
     })
     rol: RolUsuario;
+
+    @Column({ 
+        name: 'reset_password_token',
+        nullable: true,
+        select: false 
+    })
+    resetPasswordToken: string;
 
     @OneToMany(() => Obra, obra => obra.director)
     obrasDirigidas: Obra[];
@@ -57,4 +70,7 @@ export class User {
 
     @UpdateDateColumn()
     actualizadoEn: Date;
+
+    @DeleteDateColumn({ name: 'eliminado_en' }) 
+    eliminadoEn: Date;
 }
