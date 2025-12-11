@@ -1,8 +1,5 @@
 import { DataSource } from "typeorm";
 import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } from './envs';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const requiredEnvVars = ['DB_HOST', 'DB_PORT', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];
 const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
@@ -37,3 +34,18 @@ export const AppDataSource = new DataSource({
         connectionTimeoutMillis: 5000,
     }
 });
+
+export const testConnection = async () => {
+    try {
+        await AppDataSource.initialize();
+        console.log('Conectado a PostgreSQL:', {
+            host: DB_HOST,
+            database: DB_NAME,
+            user: DB_USER
+        });
+        return true;
+    } catch (error) {
+        console.error('Error conectando a PostgreSQL:', error);
+        return false;
+    }
+};
