@@ -2,7 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn,
 
 import { Obra } from "../obras/obra.entity";
 import { SolicitudEnsayo } from "../solicitudes/solicitud.entity";
-import { User } from "../users/user.entity";
+import { Usuario } from "../users/user.entity";
 
 export type EstadoEnsayo = "pendiente" | "en_proceso" | "finalizado";
 
@@ -19,8 +19,8 @@ export class Ensayo {
     @JoinColumn()
     solicitud: SolicitudEnsayo;
 
-    @ManyToOne(() => User, { nullable: false })
-    laboratorista: User;
+    @ManyToOne(() => Usuario, { nullable: false })
+    laboratorista: Usuario;
 
     @Column({
         type: "jsonb",

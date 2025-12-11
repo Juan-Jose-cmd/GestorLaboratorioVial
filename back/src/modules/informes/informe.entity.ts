@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, } from "typeorm";
 import { Ensayo } from "../ensayos/ensayo.entity";
-import { User } from "../users/user.entity";
+import { Usuario } from "../users/user.entity";
 
 export type EstadoInforme = "pendiente" | "generado" | "entregado";
 
@@ -14,8 +14,8 @@ export class Informe {
   @JoinColumn()
   ensayo: Ensayo;
 
-  @ManyToOne(() => User, { nullable: false })
-  generadoPor: User;
+  @ManyToOne(() => Usuario, { nullable: false })
+  generadoPor: Usuario;
 
   @Column({
     type: "enum",

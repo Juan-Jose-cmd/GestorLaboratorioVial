@@ -7,12 +7,12 @@ const userController = new UserController(userService);
 
 const userRouter = Router();
 
-userRouter.get('/');
+userRouter.get('/', userController.getAllUsers.bind(userController));
 
-userRouter.get('/:id');
+userRouter.get('/:id', userController.getUserById.bind(userController));
 
 userRouter.post('/register', userController.register.bind(userController));
 
-userRouter.post('/login');
+userRouter.post('/login', userController.login.bind(userController));
 
 export default userRouter;

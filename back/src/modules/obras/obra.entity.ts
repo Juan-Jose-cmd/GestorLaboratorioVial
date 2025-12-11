@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
-import { User } from "../users/user.entity";
+import { Usuario } from "../users/user.entity";
 import { SolicitudEnsayo } from "../solicitudes/solicitud.entity";
 import { Ensayo } from "../ensayos/ensayo.entity";
 import { Equipo } from "../equipos/equipo.entity";
@@ -24,8 +24,8 @@ export class Obra {
     })
     ubicacion: string;
 
-    @ManyToOne(() => User, { nullable: false })
-    director: User;
+    @ManyToOne(() => Usuario, { nullable: false })
+    director: Usuario;
 
     @Column({
         type: 'enum',

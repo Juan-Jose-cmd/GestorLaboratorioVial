@@ -17,7 +17,7 @@ export class Usuario {
         nullable: false,
         length: 100
     })
-    name: string;
+    nombreCompleto: string;
 
     @Column({
         name: 'email',
@@ -31,7 +31,7 @@ export class Usuario {
         nullable: false,
         select: false 
     })
-    password: string;
+    passwordHash: string;
 
     @Column({ 
         name: 'es_activo',

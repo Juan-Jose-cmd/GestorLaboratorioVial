@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, } from "typeorm";
 import { Equipo } from "../equipos/equipo.entity";
 import { Obra } from "../obras/obra.entity";
-import { User } from "../users/user.entity";
+import { Usuario } from "../users/user.entity";
 
 export type TipoMovimiento =
     | "asignacion"        
@@ -24,8 +24,8 @@ export class HistorialEquipo {
     @ManyToOne(() => Obra, { nullable: true })
     obraDestino: Obra | null;
 
-    @ManyToOne(() => User, { nullable: true })
-    realizadoPor: User | null;
+    @ManyToOne(() => Usuario, { nullable: true })
+    realizadoPor: Usuario | null;
 
     @Column({
         type: "enum",
