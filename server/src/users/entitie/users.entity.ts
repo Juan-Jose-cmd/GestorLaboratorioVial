@@ -1,9 +1,10 @@
-import { CreateDateColumn, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn, Index } from "typeorm";
 import { Laboratory } from 'src/laboratory/entitie/laboratory.entity';
 import { RequestTest } from "src/requests/entitie/requestTest.entity";
 import { Tests } from 'src/tests/entitie/tests.entity';
 import { MessageSent } from "src/communications/entitie/menssagesSent.entity";
 import { MessageReceived } from "src/communications/entitie/menssagesReceived.entity";
+import { Role } from '../roles.enum'; 
 
 @Entity({
   name: 'USERS',
@@ -25,6 +26,7 @@ export class Users {
     nullable: false,
     unique: true,
   })
+  @Index()
   email: string;
 
   @Column({
@@ -35,7 +37,8 @@ export class Users {
   password: string;
 
   @Column({
-    type: 'int',
+    type: 'varchar',
+    length: 20,
   })
   phone: string;
 
@@ -43,62 +46,70 @@ export class Users {
     type: 'varchar',
     length: 60,
   })
+  @Index() 
   site: string;
 
   @Column({
-    enum: ['laboratorist', 'administrator', 'supervisor', 'engineer', 'customer'],
-    default: 'laboratorist',
+    type: 'enum',
+    enum: Role,
+    default: Role.Laboratorist,
   })
-  role: string;
+  @Index() 
+  role: Role;
 
   @Column({
     type: 'boolean',
     default: true,
   })
+  @Index() 
   isActive: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   avatarUrl: string;
 
-  @Column()
-  lastAccess: string;
+  @Column({ type: 'timestamp', nullable: true })
+  lastAccess: Date;
 
-  @Column()
-  failedAttempts: string;
+  @Column({ type: 'int', default: 0 })
+  failedAttempts: number;
 
-  @Column()
-  isExternal: string;
+  @Column({ type: 'boolean', default: false })
+  isExternal: boolean;
 
-  @Column()
-  preferencesNotification: string;
+  @Column({ 
+    type: 'json',
+    nullable: true 
+  })
+  preferencesNotification: Record<string, any>;
 
-  @OneToMany(() => RequestTest, (test) => test.user)
-  @JoinColumn({ name: 'requestTest_id' })
-  requestTest: RequestTest[];
+  @OneToMany(() => RequestTest, (request) => request.user)
+  requestTests: RequestTest[];
 
-  @OneToMany(() => Tests, (tests) => tests.user)
-  @JoinColumn({ name: 'test_id' })
-  test: Tests[];
+  @OneToMany(() => Tests, (test) => test.user)
+  tests: Tests[];
 
   @OneToMany(() => MessageSent, (messageSent) => messageSent.user)
-  @JoinColumn({ name: 'test_id' })
   messagesSent: MessageSent[];
 
-  @OneToMany(() => MessageReceived, (mesageReceived) => mesageReceived.user)
-  @JoinColumn({ name: 'test_id' })
-  mesageReceived: MessageReceived[];
+  @OneToMany(() => MessageReceived, (messageReceived) => messageReceived.user)
+  messagesReceived: MessageReceived[];
 
   @ManyToOne(() => Laboratory, (laboratory) => laboratory.users)
   @JoinColumn({ name: 'laboratory_id' })
   laboratory: Laboratory;
 
-  @ManyToOne(() => Users, (bossDirect) => bossDirect.subordinates)
-  @JoinColumn({ name: 'subordinates_id' })
-  bossDirect: Users[];
+  @ManyToOne(() => Users, (boss) => boss.subordinates, { 
+    nullable: true,
+    onDelete: 'SET NULL' 
+  })
+  @JoinColumn({ name: 'boss_id' })
+  boss: Users;
 
-  @OneToMany(() => Users, (subordinates) => subordinates.bossDirect)
-  @JoinColumn({ name: 'bossdirect_id' })
-  subordinates: Users;
+  @OneToMany(() => Users, (subordinate) => subordinate.boss, {
+    cascade: false, 
+    eager: false    
+  })
+  subordinates: Users[];
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -111,5 +122,4 @@ export class Users {
     name: 'updated_at',
   })
   updatedAt: Date;
-
 }

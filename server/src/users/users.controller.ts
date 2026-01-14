@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Users } from './entitie/users.entity';
-import { UpdateUserDto } from './dto/users.dto';
+import { UpdateUserDto } from './dto/createUser.dto';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/decorators/roles.decorators';
