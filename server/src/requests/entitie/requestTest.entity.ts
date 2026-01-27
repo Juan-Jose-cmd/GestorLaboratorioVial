@@ -6,7 +6,7 @@ import { Entity, JoinColumn, ManyToOne } from "typeorm";
 })
 
 export class RequestTest {
-    @ManyToOne(() => Users, (user) => user.requestTest)
+    @ManyToOne(() => Users, (user) => user.requestTests)
     @JoinColumn({ name: 'user_id' })
     user: Users;
 }

@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { LaboratoryModule } from './laboratory/laboratory.module';
 
 @Module({
   imports: [
@@ -24,7 +25,9 @@ import { AuthModule } from './auth/auth.module';
       signOptions: { expiresIn: '60m' },
     }),
     UsersModule,
-    AuthModule,],
+    AuthModule,
+    LaboratoryModule,
+  ],
   controllers: [],
   providers: [],
 })

@@ -16,4 +16,8 @@ export const envs = {
   CLOUDINARY_CLOUD_SECRET: process.env.CLOUDINARY_CLOUD_SECRET,
 
   JWT_SECRET: process.env.JWT_SECRET,
+
+  MAIL_PROVIDER: process.env.MAIL_PROVIDER || 'log',
+  SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+  MAIL_FROM: process.env.MAIL_FROM || 'notificaciones@laboratorio.com',
 };

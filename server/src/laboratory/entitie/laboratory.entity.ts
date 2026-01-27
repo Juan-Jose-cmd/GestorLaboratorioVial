@@ -1,12 +1,17 @@
-import { Users } from "src/users/entitie/users.entity";
-import { Entity, JoinColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Users } from 'src/users/entitie/users.entity';
 
-@Entity({
-    name: 'LABORATORY'
-})
+@Entity({ name: 'LABORATORIES' })
 export class Laboratory {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @OneToMany(() => Users, (user) => user.laboratory)
-    @JoinColumn({ name: 'user_id' })
-    users: Users[];
+  @Column({ type: 'varchar', length: 100 })
+  name: string;
+
+  @Column({ type: 'boolean', default: true })
+  isActive: boolean;
+
+  @OneToMany(() => Users, (user) => user.laboratory)
+  users: Users[];
 }

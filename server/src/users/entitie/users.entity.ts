@@ -1,4 +1,7 @@
-import { CreateDateColumn, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn, Index } from "typeorm";
+import { 
+  CreateDateColumn, Column, Entity, JoinColumn, ManyToOne, OneToMany, 
+  PrimaryGeneratedColumn, UpdateDateColumn, Index 
+} from "typeorm";
 import { Laboratory } from 'src/laboratory/entitie/laboratory.entity';
 import { RequestTest } from "src/requests/entitie/requestTest.entity";
 import { Tests } from 'src/tests/entitie/tests.entity';
@@ -80,7 +83,22 @@ export class Users {
     type: 'json',
     nullable: true 
   })
-  preferencesNotification: Record<string, any>;
+  preferences: Record<string, any>; 
+
+  @Column({ nullable: true })
+  resetToken: string;
+
+  @Column({ type: 'timestamp', nullable: true })
+  resetTokenExpiry: Date;
+
+  @Column({ nullable: true })
+  pendingEmail: string;
+
+  @Column({ nullable: true })
+  emailChangeToken: string;
+
+  @Column({ type: 'timestamp', nullable: true })
+  emailChangeTokenExpiry: Date;
 
   @OneToMany(() => RequestTest, (request) => request.user)
   requestTests: RequestTest[];
